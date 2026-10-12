@@ -2,215 +2,449 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Milverth | Portafolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Milver Paitan | Fotografía & Edición</title>
+  <meta name="description" content="Portafolio de Milver Paitan — comunicador, fotógrafo y editor de video. Fotografía de eventos y música electrónica en Lima.">
+  <meta name="theme-color" content="#05050a">
+  <meta property="og:title" content="Milver Paitan | Fotografía & Edición">
+  <meta property="og:description" content="Fotografía de eventos, música electrónica y edición de video.">
+  <meta property="og:image" content="img/full-8.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg: #05050a;
+      --bg-2: #0b0b14;
+      --line: rgba(255, 255, 255, 0.08);
+      --text: #eceaf2;
+      --muted: #8d8a9c;
+      --red: #ff2d55;
+      --magenta: #d946ef;
+      --cyan: #22d3ee;
+      --grad: linear-gradient(100deg, var(--red), var(--magenta) 55%, var(--cyan));
+      --mono: "JetBrains Mono", ui-monospace, monospace;
+      --sans: "Space Grotesk", system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      background-color: black;
-      color: white;
-      font-family: Arial, sans-serif;
-      font-size: 18px;
       margin: 0;
-      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    ::selection { background: var(--magenta); color: #fff; }
+
+    /* Ruido + rejilla de fondo */
+    body::before {
+      content: "";
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 0%, #000 0%, transparent 70%);
+      opacity: .5;
+      pointer-events: none;
+      z-index: -1;
     }
 
-    header {
-      padding: 20px;
-      text-align: center;
-    }
+    .wrap { width: min(1200px, 100% - 32px); margin-inline: auto; }
+    .mono { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+    .grad-text { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
-    nav button {
-      background: none;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      margin: 5px;
-      cursor: pointer;
-      font-size: 18px;
-      font-weight: bold;
+    /* NAV */
+    .nav {
+      position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
+      width: min(1200px, 100% - 32px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 12px 10px 20px;
+      background: rgba(10, 10, 18, .55);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      backdrop-filter: blur(14px) saturate(140%);
+      -webkit-backdrop-filter: blur(14px) saturate(140%);
+      z-index: 50;
     }
-
-    nav button:hover {
-      background: #0099cc;
+    .logo { font-weight: 700; letter-spacing: .02em; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+    .logo-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--red); box-shadow: 0 0 12px var(--red); animation: pulse 2s infinite; }
+    @keyframes pulse { 50% { opacity: .35; } }
+    .nav ul { list-style: none; display: flex; gap: 4px; margin: 0; padding: 0; }
+    .nav a.link {
+      display: block; padding: 8px 16px; border-radius: 999px;
+      font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase;
+      text-decoration: none; color: var(--muted); transition: color .2s, background .2s;
     }
+    .nav a.link:hover, .nav a.link.active { color: var(--text); background: rgba(255,255,255,.07); }
+    .nav a.cta { color: #fff; background: var(--red); box-shadow: 0 0 24px rgba(255,45,85,.45); }
+    .nav a.cta:hover { background: #ff4d6d; }
 
-    section {
-      padding: 30px;
-      text-align: center;
-    }
-
-    /* PORTADA */
-    #sobre-mi .portada {
-      background-color: #0d0d0d;
-      padding: 80px 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      flex-wrap: wrap;
-    }
-
-    .contenido-portada {
-      max-width: 1200px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      gap: 40px;
-    }
-
-    .texto-portada {
-      flex: 1 1 400px;
-    }
-
-    .texto-portada h1 {
-      font-size: 42px;
-      margin-bottom: 20px;
-    }
-
-    .texto-portada p {
-      font-size: 18px;
-      margin-bottom: 15px;
-    }
-
-    .imagen-portada {
-      flex: 1 1 300px;
-    }
-
-    .imagen-portada img {
-      max-width: 100%;
-      height: auto;
-    }
-
-    /* GALERIA */
-    .galeria {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 5px;
-      padding: 10px;
-    }
-
-    .cuadro {
-      width: 100%;
-      aspect-ratio: 1 / 1;
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: grid; align-items: end;
+      padding: 140px 0 72px;
+      isolation: isolate;
       overflow: hidden;
     }
-
-    .cuadro img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      cursor: pointer;
-      transition: transform 0.3s;
+    .hero-bg {
+      position: absolute; inset: 0; z-index: -2;
+      background: url("img/full-8.jpg") center 35% / cover no-repeat;
+      transform: scale(1.08);
+      animation: drift 22s ease-in-out infinite alternate;
     }
-
-    .cuadro img:hover {
-      transform: scale(1.05);
+    @keyframes drift { to { transform: scale(1.16) translate(-1.5%, -1%); } }
+    .hero::after {
+      content: ""; position: absolute; inset: 0; z-index: -1;
+      background:
+        linear-gradient(180deg, rgba(5,5,10,.55) 0%, rgba(5,5,10,.35) 40%, var(--bg) 100%),
+        radial-gradient(ellipse at 80% 20%, rgba(217,70,239,.25), transparent 55%);
     }
-
-    #visor {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
+    .scan {
+      position: absolute; inset: 0; z-index: -1; pointer-events: none;
+      background: repeating-linear-gradient(0deg, rgba(255,255,255,.025) 0 1px, transparent 1px 3px);
     }
-
-    #visor img {
-      max-width: 90%;
-      max-height: 90%;
+    .hero .tag { display: inline-flex; align-items: center; gap: 10px; padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px; background: rgba(5,5,10,.5); backdrop-filter: blur(8px); }
+    .hero .tag i { width: 6px; height: 6px; border-radius: 50%; background: #3ef08a; box-shadow: 0 0 10px #3ef08a; }
+    .hero h1 {
+      font-size: clamp(52px, 11vw, 168px);
+      line-height: .88;
+      letter-spacing: -.045em;
+      font-weight: 700;
+      margin: 28px 0 28px;
+      text-transform: uppercase;
     }
-
-    @media (max-width: 768px) {
-      .galeria {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 4px;
-      }
+    .hero h1 .outline { color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,.85); }
+    .hero-foot { display: flex; flex-wrap: wrap; gap: 32px; align-items: end; justify-content: space-between; }
+    .hero p.lead { max-width: 520px; font-size: clamp(17px, 1.6vw, 20px); color: #cfccd9; margin: 0; }
+    .btns { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 24px; border-radius: 999px;
+      font-family: var(--mono); font-size: 13px; letter-spacing: .1em; text-transform: uppercase;
+      text-decoration: none; border: 1px solid var(--line);
+      transition: transform .2s, box-shadow .2s, background .2s;
     }
+    .btn:hover { transform: translateY(-2px); }
+    .btn.primary { background: var(--grad); color: #fff; border: none; box-shadow: 0 10px 40px -10px rgba(217,70,239,.7); }
+    .btn.ghost { background: rgba(255,255,255,.04); backdrop-filter: blur(8px); }
+    .btn.ghost:hover { background: rgba(255,255,255,.1); }
 
-    @media (max-width: 480px) {
-      .galeria {
-        grid-template-columns: 1fr;
-        gap: 3px;
-      }
+    /* MARQUEE */
+    .marquee { border-block: 1px solid var(--line); overflow: hidden; padding: 18px 0; background: var(--bg-2); }
+    .marquee-track { display: flex; gap: 48px; width: max-content; animation: scroll 32s linear infinite; }
+    .marquee span { font-size: 22px; font-weight: 500; letter-spacing: -.01em; white-space: nowrap; display: flex; align-items: center; gap: 48px; }
+    .marquee span::after { content: "✦"; color: var(--magenta); font-size: 14px; }
+    @keyframes scroll { to { transform: translateX(-50%); } }
+
+    /* SECCIONES */
+    section { padding: 120px 0; }
+    .sec-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: 56px; }
+    .sec-head h2 { font-size: clamp(36px, 5.5vw, 72px); line-height: 1; letter-spacing: -.035em; margin: 12px 0 0; font-weight: 700; }
+    .sec-head p { max-width: 420px; color: var(--muted); margin: 0; }
+
+    /* SOBRE MÍ */
+    .about { display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items: center; }
+    .about-img { position: relative; border-radius: 24px; overflow: hidden; aspect-ratio: 4/5; border: 1px solid var(--line); }
+    .about-img img { width: 100%; height: 100%; object-fit: cover; }
+    .about-img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(5,5,10,.85)); }
+    .about-img .corner { position: absolute; left: 20px; bottom: 18px; z-index: 1; }
+    .about-text h2 { font-size: clamp(32px, 4.2vw, 56px); line-height: 1.05; letter-spacing: -.03em; margin: 14px 0 24px; }
+    .about-text p { color: #c3c0cf; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 40px; background: var(--line); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; }
+    .stat { background: var(--bg); padding: 22px 20px; }
+    .stat b { display: block; font-size: 36px; letter-spacing: -.03em; line-height: 1.1; }
+
+    /* SERVICIOS */
+    .services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card {
+      position: relative; padding: 32px 28px 30px; border-radius: 20px;
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
+      border: 1px solid var(--line);
+      overflow: hidden; transition: border-color .3s, transform .3s;
+    }
+    .card::before {
+      content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 1px;
+      background: var(--grad); opacity: 0; transition: opacity .3s;
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+    }
+    .card:hover { transform: translateY(-4px); }
+    .card:hover::before { opacity: 1; }
+    .card .num { font-family: var(--mono); color: var(--magenta); font-size: 13px; }
+    .card h3 { font-size: 24px; letter-spacing: -.02em; margin: 40px 0 10px; }
+    .card p { color: var(--muted); margin: 0; font-size: 16px; }
+
+    /* GALERÍA */
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; }
+    .gallery { columns: 3 320px; column-gap: 14px; }
+    .shot {
+      position: relative; margin: 0 0 14px; break-inside: avoid;
+      border-radius: 16px; overflow: hidden; cursor: zoom-in;
+      border: 1px solid var(--line); background: var(--bg-2);
+    }
+    .shot img { width: 100%; height: auto; transition: transform .7s cubic-bezier(.2,.7,.2,1), filter .5s; filter: saturate(1.05); }
+    .shot::after {
+      content: ""; position: absolute; inset: 0; opacity: 0; transition: opacity .4s;
+      background: linear-gradient(180deg, transparent 55%, rgba(5,5,10,.85));
+    }
+    .shot figcaption {
+      position: absolute; left: 16px; right: 16px; bottom: 14px; z-index: 1;
+      display: flex; justify-content: space-between; align-items: center;
+      opacity: 0; transform: translateY(8px); transition: .4s;
+    }
+    .shot figcaption .mono { color: #fff; }
+    .shot:hover img { transform: scale(1.05); }
+    .shot:hover::after, .shot:hover figcaption, .shot:focus-visible figcaption, .shot:focus-visible::after { opacity: 1; transform: none; }
+    .shot:focus-visible { outline: 2px solid var(--magenta); outline-offset: 2px; }
+
+    /* VISOR */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 100;
+      display: grid; place-items: center;
+      background: rgba(3,3,7,.94); backdrop-filter: blur(10px);
+      opacity: 0; pointer-events: none; transition: opacity .3s;
+    }
+    .lightbox.open { opacity: 1; pointer-events: auto; }
+    .lightbox img { max-width: min(92vw, 1600px); max-height: 84vh; border-radius: 10px; box-shadow: 0 30px 120px -20px rgba(217,70,239,.35); transform: scale(.97); transition: transform .3s; }
+    .lightbox.open img { transform: none; }
+    .lb-btn {
+      position: absolute; width: 52px; height: 52px; border-radius: 50%;
+      border: 1px solid var(--line); background: rgba(255,255,255,.05); color: #fff;
+      font-size: 22px; cursor: pointer; display: grid; place-items: center; transition: background .2s;
+    }
+    .lb-btn:hover { background: rgba(255,255,255,.14); }
+    .lb-close { top: 20px; right: 20px; }
+    .lb-prev { left: 20px; top: 50%; transform: translateY(-50%); }
+    .lb-next { right: 20px; top: 50%; transform: translateY(-50%); }
+    .lb-count { position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%); }
+
+    /* CONTACTO */
+    .contact {
+      position: relative; border-radius: 32px; overflow: hidden; isolation: isolate;
+      padding: clamp(48px, 8vw, 110px) clamp(24px, 6vw, 80px);
+      border: 1px solid var(--line); text-align: center;
+      background: radial-gradient(ellipse at 20% 0%, rgba(255,45,85,.28), transparent 55%),
+                  radial-gradient(ellipse at 90% 100%, rgba(34,211,238,.2), transparent 55%),
+                  var(--bg-2);
+    }
+    .contact h2 { font-size: clamp(40px, 7.5vw, 104px); line-height: .95; letter-spacing: -.045em; margin: 18px 0 28px; }
+    .contact p { color: var(--muted); max-width: 520px; margin: 0 auto 36px; }
+    .mail { font-size: clamp(18px, 2.4vw, 28px); text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: 4px; transition: border-color .2s; }
+    .mail:hover { border-color: var(--magenta); }
+
+    footer { padding: 40px 0 48px; }
+    footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 28px; }
+
+    /* Aparición al hacer scroll */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
+    .reveal.in { opacity: 1; transform: none; }
+
+    @media (max-width: 900px) {
+      .about { grid-template-columns: 1fr; gap: 40px; }
+      .services { grid-template-columns: 1fr; }
+      .nav ul li.hide-sm { display: none; }
+      section { padding: 88px 0; }
+    }
+    @media (max-width: 520px) {
+      .nav { padding-left: 16px; }
+      .nav a.link { padding: 8px 12px; }
+      .stat b { font-size: 28px; }
+      .lb-prev, .lb-next { top: auto; bottom: 14px; transform: none; }
+      .lb-count { bottom: 30px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <button onclick="mostrar('sobre-mi')">Sobre mí</button>
-      <button onclick="mostrar('portafolio')">Portafolio</button>
-      <button onclick="mostrar('contacto')">Contacto</button>
-    </nav>
+
+  <nav class="nav" aria-label="Principal">
+    <a href="#inicio" class="logo"><span class="logo-dot"></span>MILVERTH</a>
+    <ul>
+      <li class="hide-sm"><a class="link" href="#sobre-mi">Sobre mí</a></li>
+      <li><a class="link" href="#portafolio">Portafolio</a></li>
+      <li><a class="link cta" href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero" id="inicio">
+    <div class="hero-bg" role="img" aria-label="DJ en cabina con luces rojas"></div>
+    <div class="scan"></div>
+    <div class="wrap">
+      <span class="tag mono"><i></i>Disponible para proyectos · Lima, PE</span>
+      <h1>Milver<br><span class="outline">Paitan</span></h1>
+      <div class="hero-foot">
+        <p class="lead">Comunicador, fotógrafo y editor. Capturo la energía de la noche, la música y las personas — contenido visual que cuenta historias auténticas.</p>
+        <div class="btns">
+          <a href="#portafolio" class="btn primary">Ver trabajos ↘</a>
+          <a href="#contacto" class="btn ghost">Hablemos</a>
+        </div>
+      </div>
+    </div>
   </header>
 
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Fotografía de eventos</span><span>Edición de video</span><span>Música electrónica</span><span>Live Room Lima</span><span>Retoque & color</span><span>Contenido para redes</span>
+      <span>Fotografía de eventos</span><span>Edición de video</span><span>Música electrónica</span><span>Live Room Lima</span><span>Retoque & color</span><span>Contenido para redes</span>
+    </div>
+  </div>
+
   <section id="sobre-mi">
-    <div class="portada">
-      <div class="contenido-portada">
-        <div class="texto-portada">
-          <h1><span style="font-weight: bold;">Portafolio</span> <span style="font-size: 18px;">x Milver Paitan</span></h1>
-          <p>Soy comunicador, fotógrafo y editor. Me apasionan la <strong>fotografía</strong> y la <strong>edición de videos</strong>, creando contenido visual que inspire y transmita historias auténticas.</p>
-          <p>Este portafolio reúne algunos de mis trabajos, donde exploro mi <strong>estilo</strong> y <strong>habilidades</strong> en cada proyecto.</p>
-        </div>
-        <div class="imagen-portada">
-          <img src="portada.png" alt="Portada grafica">
+    <div class="wrap about">
+      <figure class="about-img reveal" style="margin:0">
+        <img src="img/thumb-1.jpg" alt="Público grabando con su celular bajo luces azules" loading="lazy">
+        <span class="corner mono">// 001 — Detrás del lente</span>
+      </figure>
+      <div class="about-text reveal">
+        <span class="mono">// Sobre mí</span>
+        <h2>Imágenes con <span class="grad-text">pulso</span>, luz y ritmo.</h2>
+        <p>Soy comunicador, fotógrafo y editor. Me apasionan la <strong>fotografía</strong> y la <strong>edición de videos</strong>, creando contenido visual que inspire y transmita historias auténticas.</p>
+        <p>Este portafolio reúne algunos de mis trabajos, donde exploro mi <strong>estilo</strong> y <strong>habilidades</strong> en cada proyecto: escenas nocturnas, cabinas de DJ y la energía del público.</p>
+        <div class="stats">
+          <div class="stat"><b class="grad-text">Foto</b><span class="mono">Eventos</span></div>
+          <div class="stat"><b class="grad-text">Video</b><span class="mono">Edición</span></div>
+          <div class="stat"><b class="grad-text">Color</b><span class="mono">Retoque</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="portafolio" style="display: none;">
-    <h2>Portafolio</h2>
-    <div class="galeria">
-      <!-- Aquí van las 12 imágenes como antes -->
-      <div class="cuadro"><img src="foto1.jpg" alt="Foto 1" loading="lazy" onclick="mostrarImagen(this.src)"></div>
-      <div class="cuadro"><img src="foto2.jpg" alt="Foto 2" loading="lazy" onclick="mostrarImagen(this.src)"></div>
-      <div class="cuadro"><img src="foto3.jpg" alt="Foto 3" loading="lazy" onclick="mostrarImagen(this.src)"></div>
-      <div class="cuadro"><img src="foto4.jpg" alt="Foto 4" loading="lazy" onclick="mostrarImagen(this.src)"></div>
-      <div class="cuadro"><img src="foto5.jpg" alt="Foto 5" loading="lazy" onclick="mostrarImagen(this.src)"></div>
-      <div class="cuadro"><img src="foto6.jpg" alt="Foto 6" loading="lazy" onclick="mostrarImagen(this.src)"></div>
-      <div class="cuadro"><img src="foto7.jpg" alt="Foto 7" loading="lazy" onclick="mostrarImagen(this.src)"></div>
-      <div class="cuadro"><img src="foto8.jpg" alt="Foto 8" loading="lazy" onclick="mostrarImagen(this.src)"></div>
-      <div class="cuadro"><img src="foto9.jpg" alt="Foto 9" loading="lazy" onclick="mostrarImagen(this.src)"></div>
-      <div class="cuadro"><img src="foto10.png" alt="Foto 10" loading="lazy" onclick="mostrarImagen(this.src)"></div>
-      <div class="cuadro"><img src="foto11.jpg" alt="Foto 11" loading="lazy" onclick="mostrarImagen(this.src)"></div>
-      <div class="cuadro"><img src="foto12.jpg" alt="Foto 12" loading="lazy" onclick="mostrarImagen(this.src)"></div>
-    </div>
-    <div id="visor" onclick="cerrarImagen()">
-      <img id="imagenGrande" src="">
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div><span class="mono">// Servicios</span><h2>Lo que hago</h2></div>
+        <p>Del disparo a la entrega final: un flujo completo para marcas, artistas y eventos.</p>
+      </div>
+      <div class="services">
+        <article class="card reveal"><span class="num">01</span><h3>Fotografía de eventos</h3><p>Cobertura de fiestas, conciertos y sets en vivo con luz difícil y mucho movimiento.</p></article>
+        <article class="card reveal"><span class="num">02</span><h3>Edición de video</h3><p>Recaps, reels y aftermovies con ritmo, sonido y color pensados para redes.</p></article>
+        <article class="card reveal"><span class="num">03</span><h3>Retoque & color</h3><p>Gradación de color y retoque con una estética coherente para toda tu marca.</p></article>
+      </div>
     </div>
   </section>
 
-  <section id="contacto" style="display: none;">
-    <h2>Contacto</h2>
-    <p>Puedes escribirme a: <a href="mailto:milverpaitan@gmail.com">milverpaitan@gmail.com</a></p>
-    <p>Instagram: <a href="https://instagram.com/tuusuario" target="_blank">@tuusuario</a></p>
+  <section id="portafolio" style="padding-top:40px">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div><span class="mono">// Portafolio — Live Room Lima</span><h2>Trabajos <span class="grad-text">seleccionados</span></h2></div>
+        <p>Una selección de sesiones en vivo. Haz clic en cualquier foto para verla en grande.</p>
+      </div>
+      <div class="gallery" id="gallery"></div>
+    </div>
+  </section>
+
+  <section id="contacto" style="padding-top:40px">
+    <div class="wrap">
+      <div class="contact reveal">
+        <span class="mono">// Contacto</span>
+        <h2>¿Tienes un<br><span class="grad-text">proyecto?</span></h2>
+        <p>Cuéntame de tu evento, marca o idea. Respondo lo antes posible.</p>
+        <a class="mail" href="mailto:milverpaitan@gmail.com">milverpaitan@gmail.com ↗</a>
+      </div>
+    </div>
   </section>
 
   <footer>
-    <p>&copy; 2025 Milverth. Todos los derechos reservados.</p>
+    <div class="wrap">
+      <span class="mono">© <span id="year">2025</span> Milverth — Todos los derechos reservados</span>
+      <a class="mono" href="#inicio" style="text-decoration:none">Volver arriba ↑</a>
+    </div>
   </footer>
 
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visor de imágenes">
+    <img id="lb-img" src="" alt="">
+    <button class="lb-btn lb-close" id="lb-close" aria-label="Cerrar">✕</button>
+    <button class="lb-btn lb-prev" id="lb-prev" aria-label="Anterior">←</button>
+    <button class="lb-btn lb-next" id="lb-next" aria-label="Siguiente">→</button>
+    <span class="lb-count mono" id="lb-count"></span>
+  </div>
+
   <script>
-    function mostrar(id) {
-      document.getElementById('sobre-mi').style.display = 'none';
-      document.getElementById('portafolio').style.display = 'none';
-      document.getElementById('contacto').style.display = 'none';
-      document.getElementById(id).style.display = 'block';
-    }
+    // Fotos (foto12 era un duplicado de foto2, por eso no se incluye)
+    const fotos = [8, 2, 3, 4, 5, 6, 7, 9, 10, 11, 1];
+    const gallery = document.getElementById('gallery');
 
-    function mostrarImagen(src) {
-      document.getElementById('imagenGrande').src = src;
-      document.getElementById('visor').style.display = 'flex';
-    }
+    fotos.forEach((n, i) => {
+      const fig = document.createElement('figure');
+      fig.className = 'shot reveal';
+      fig.tabIndex = 0;
+      fig.innerHTML =
+        '<img src="img/thumb-' + n + '.jpg" alt="Fotografía de evento ' + (i + 1) + ' — Live Room Lima" loading="lazy">' +
+        '<figcaption><span class="mono">' + String(i + 1).padStart(3, '0') + ' / Live Room</span><span class="mono">Ver ↗</span></figcaption>';
+      fig.addEventListener('click', () => abrir(i));
+      fig.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abrir(i); } });
+      gallery.appendChild(fig);
+    });
 
-    function cerrarImagen() {
-      document.getElementById('visor').style.display = 'none';
+    // Visor
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-img');
+    const lbCount = document.getElementById('lb-count');
+    let actual = 0;
+
+    function abrir(i) {
+      actual = (i + fotos.length) % fotos.length;
+      lbImg.src = 'img/full-' + fotos[actual] + '.jpg';
+      lbImg.alt = 'Fotografía ' + (actual + 1);
+      lbCount.textContent = String(actual + 1).padStart(2, '0') + ' / ' + String(fotos.length).padStart(2, '0');
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
     }
+    function cerrar() {
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.getElementById('lb-close').onclick = cerrar;
+    document.getElementById('lb-prev').onclick = e => { e.stopPropagation(); abrir(actual - 1); };
+    document.getElementById('lb-next').onclick = e => { e.stopPropagation(); abrir(actual + 1); };
+    lb.addEventListener('click', e => { if (e.target === lb) cerrar(); });
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') cerrar();
+      if (e.key === 'ArrowLeft') abrir(actual - 1);
+      if (e.key === 'ArrowRight') abrir(actual + 1);
+    });
+
+    // Deslizar en móvil
+    let x0 = null;
+    lb.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+    lb.addEventListener('touchend', e => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 50) abrir(actual + (dx < 0 ? 1 : -1));
+      x0 = null;
+    });
+
+    // Animación al hacer scroll
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Enlace activo en la barra
+    const links = document.querySelectorAll('.nav a.link');
+    const navIo = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (en.isIntersecting) links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + en.target.id));
+      });
+    }, { rootMargin: '-50% 0px -50% 0px' });
+    ['sobre-mi', 'portafolio', 'contacto'].forEach(id => navIo.observe(document.getElementById(id)));
+
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
